@@ -34,4 +34,10 @@ def main():
             continue
         series.append([dt, value])
     df = pd.DataFrame.from_records(series, columns=["Time", "Value"])
-    df.to_csv(args.output)
+    if args.format == 'csv':
+        df.to_csv(args.output)
+    elif args.format == 'json':
+        df.to_json(args.output)
+    else:
+        print("Unsupported output format")
+        sys.exit(1)
